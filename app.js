@@ -40,7 +40,7 @@ app.get('/api/imagesearch/:val*', function(req,res) {
     top: 10,
     skip: sOffset
   }, function(error,response,body) {
-    /*var bingData = [];
+    var bingData = [];
       for(var i=0;i<10;i++) {
         bingData.push({
           'url': body.value[i].contentUrl,
@@ -48,8 +48,8 @@ app.get('/api/imagesearch/:val*', function(req,res) {
           'snippet': body.value[i].thumbnailUrl,
           'context': body.value[i].hostPageUrl
         })
-      }*/
-    return res.json(body)
+      }
+    return res.json(bingData)
   })
 });
 
