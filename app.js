@@ -45,6 +45,8 @@ app.get('/api/imagesearch/:val*', function(req,res) {
           'context': body.value[i].hostPageUrl
         })
       }
+    } else {
+      return res.send('not working')
     }
     return res.json(bingData)
   })
