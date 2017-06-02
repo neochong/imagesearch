@@ -36,13 +36,15 @@ app.get('/api/imagesearch/:val*', function(req,res) {
     skip: offset
   }, function(error,response,body) {
     var bingData = [];
-    for(var i=0;i<10;i++) {
-      bingData.push({
-        'url': body.value[i].contentUrl,
-        'name': body.value[i].name,
-        'snippet': body.value[i].thumbnailUrl,
-        'context': body.value[i].hostPageUrl
-      })
+    if(body) {
+      for(var i=0;i<10;i++) {
+        bingData.push({
+          'url': body.value[i].contentUrl,
+          'name': body.value[i].name,
+          'snippet': body.value[i].thumbnailUrl,
+          'context': body.value[i].hostPageUrl
+        })
+      }
     }
     return res.json(bingData)
   })
