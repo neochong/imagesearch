@@ -36,7 +36,7 @@ app.get('/api/imagesearch/:val*', function(req,res) {
     skip: offset
   }, function(error,response,body) {
     var bingData = [];
-    if(body) {
+    if(body===true) {
       for(var i=0;i<10;i++) {
         bingData.push({
           'url': body.value[i].contentUrl,
