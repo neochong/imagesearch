@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var Bing = require('node-bing-api')({ accKey: '3d73de8cc8a4419d82ccabe81a79cfe8'});
+var Bing = require('node-bing-api')({ accKey: '6b9500bbbd7d4fb781649cd78a41b28b'});
 
 var searchTerm = require('./models/searchTerm');
 var app = express();
@@ -21,6 +21,7 @@ db.once('open', function callback () {
 app.get('/api/imagesearch/:val*', function(req,res) {
   var searchVal = req.params.val;
   var offset = req.query.offset;
+  var sOffset = 0;
   var data = new searchTerm({
     searchVal,
   })
@@ -31,12 +32,15 @@ app.get('/api/imagesearch/:val*', function(req,res) {
     }
   });
 
+  if(offset ) {
+    sOffset = offset;
+  }
+
   Bing.images(searchVal, {
     top: 10,
-    skip: offset
+    skip: sOffset
   }, function(error,response,body) {
-    var bingData = [];
-    if(body===true) {
+    /*var bingData = [];
       for(var i=0;i<10;i++) {
         bingData.push({
           'url': body.value[i].contentUrl,
@@ -44,11 +48,8 @@ app.get('/api/imagesearch/:val*', function(req,res) {
           'snippet': body.value[i].thumbnailUrl,
           'context': body.value[i].hostPageUrl
         })
-      }
-    } else {
-      return res.send('not working')
-    }
-    return res.json(bingData)
+      }*/
+    return res.json(body)
   })
 });
 
