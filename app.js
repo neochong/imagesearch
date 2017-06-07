@@ -2,7 +2,7 @@ require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var Bing = require('node-bing-api')({ accKey: '6b9500bbbd7d4fb781649cd78a41b28b'});
+var Bing = require('node-bing-api')({ accKey: process.env.BING_API });
 
 var searchTerm = require('./models/searchTerm');
 var app = express();
