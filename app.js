@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -7,7 +8,7 @@ var searchTerm = require('./models/searchTerm');
 var app = express();
 app.use(bodyParser.json());
 
-var url = 'mongodb://neochong:test1234@ds143071.mlab.com:43071/fcc-project/searchterms';
+var url = process.env.URL;
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
                 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
 mongoose.Promise = global.Promise;
